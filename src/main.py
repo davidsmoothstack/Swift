@@ -1,12 +1,11 @@
 import logging
-import os
+from models.AptPackageManager import AptPackageManager
 
 import log_config
 
 
 if __name__ == "__main__":
     try:
-        log_config.init()
-        logging.info("Hello world")
+        test = AptPackageManager()
     except:
         logging.exception("")
