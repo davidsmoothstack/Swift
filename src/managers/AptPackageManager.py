@@ -1,9 +1,9 @@
 import logging
-from managers.IPackageManager import IPackageManager
+from managers.BasePackageManager import BasePackageManager
 from util.shell import shell
 
 
-class AptPackageManager(IPackageManager):
+class AptPackageManager(BasePackageManager):
     def install_package(self, package_name: str):
         """Installs a package"""
         return shell(f"sudo apt install -y {package_name}")

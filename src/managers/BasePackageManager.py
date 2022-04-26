@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class IPackageManager(ABC):
+class BasePackageManager(ABC):
     @abstractmethod
     def install_package(self, package_name: str):
         """Installs a package"""
