@@ -1,3 +1,4 @@
+import logging
 import os
 from dataclasses import dataclass
 
@@ -10,6 +11,7 @@ class ShellResult():
 
 def shell(command) -> ShellResult:
     """Runs a shell command. Returns the status code"""
+    logging.debug(f"Executing shell command: {command}")
     status_code = os.system(command)
     isSuccess = status_code == 0
 
