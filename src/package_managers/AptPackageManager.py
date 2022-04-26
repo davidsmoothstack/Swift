@@ -1,4 +1,4 @@
-from managers.IPackageManager import IPackageManager
+from package_managers.IPackageManager import IPackageManager
 from shell import shell
 
 

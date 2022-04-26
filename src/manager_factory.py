@@ -1,7 +1,7 @@
 from enum import Enum
 
-from managers.AptPackageManager import AptPackageManager
-from managers.IPackageManager import IPackageManager
+from package_managers.AptPackageManager import AptPackageManager
+from package_managers.IPackageManager import IPackageManager
 
 
 class PackageManagerType(Enum):

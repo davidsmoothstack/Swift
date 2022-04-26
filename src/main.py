@@ -1,7 +1,6 @@
 import logging
 import log_config
-from managers.PackageManagerFactory import (PackageManagerType,
-                                            get_package_manager)
+from src.manager_factory import PackageManagerType, get_package_manager
 
 if __name__ == "__main__":
     try:
