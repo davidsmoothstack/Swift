@@ -1,4 +1,4 @@
-from models.IPackageManager import IPackageManager
+from managers.IPackageManager import IPackageManager
 from shell import shell
 
 
