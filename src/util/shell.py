@@ -1,12 +1,7 @@
 import logging
 import os
-from dataclasses import dataclass
 
-
-@dataclass(frozen=True)
-class ShellResult():
-    isSuccess: bool
-    statusCode: int
+from models.ShellResult import ShellResult
 
 
 def shell(command) -> ShellResult:
