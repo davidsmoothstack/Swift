@@ -8,7 +8,7 @@ class IPackageManager(ABC):
         pass
 
     @abstractmethod
-    def post_check(self, package_name: str):
+    def post_install(self, package_name: str):
         """Runs a check after package is installed"""
         pass
 

@@ -7,7 +7,7 @@ class AptPackageManager(IPackageManager):
         """Installs a package"""
         return shell(f"sudo apt install -y {package_name}")
 
-    def post_check(self, package_name: str):
+    def post_install(self, package_name: str):
         """Runs a check after package is installed"""
         pass
 
