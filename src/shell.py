@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-def ShellResult():
+class ShellResult():
     isSuccess: bool
     statusCode: int
 
