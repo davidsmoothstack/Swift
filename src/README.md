@@ -7,9 +7,10 @@ Add desired packages into `packages.yml` with this format:
 ```yml
 packages:
   - name: <required>
-    packageName: <required>
-    packageManager: <optional>
-    test:
+    manager:
+      name: <required>
+      options: <optional>
+    installatonTest:
       command: <required>
-      expected_status: <optional>
+      expectedStatus: <optional>
 ```
