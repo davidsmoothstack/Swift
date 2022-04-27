@@ -13,7 +13,7 @@ class SnapPackageManager(BasePackageManager):
 
     def is_installed(self, package_name: str):
         """Check if the package already exists on the system"""
-        return shell(f"snap info {package_name}")
+        return shell(f"snap list {package_name}")
 
     def upgrade_package(self, package_name: str):
         """Upgrades the package"""

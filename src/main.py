@@ -11,8 +11,12 @@ if __name__ == "__main__":
         yml = read_yaml("packages.yml")
 
         for package_config in yml.packages:
-            manager = get_package_manager(package_config)
-            manager.execute(package_config.name)
+            try:
+                manager = get_package_manager(package_config)
+                manager.execute(package_config.name)
+            except:
+                logging.error(f"Error installing {package_config.name}")
+                continue
 
     except:
         logging.exception("")

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from gc import is_finalized
 import logging
 
 
