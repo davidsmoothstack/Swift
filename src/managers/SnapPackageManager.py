@@ -1,27 +1,20 @@
-from abc import ABC, abstractmethod
+from managers.BasePackageManager import BasePackageManager
+from util.shell import shell
 
 
-class BasePackageManager(ABC):
-    def __init__(self, options=None):
-        super().__init__()
-        self.options = options
-
-    @abstractmethod
+class SnapPackageManager(BasePackageManager):
     def install_package(self, package_name: str):
         """Installs a package"""
-        pass
+        return shell(f"sudo snap install {package_name}")
 
-    @abstractmethod
     def post_install(self, package_name: str):
         """Runs a check after package is installed"""
         pass
 
-    @abstractmethod
     def is_installed(self, package_name: str):
         """Check if the package already exists on the system"""
-        pass
+        return shell(f"snap info {package_name}")
 
-    @abstractmethod
     def upgrade_package(self, package_name: str):
         """Upgrades the package"""
-        pass
+        return shell(f"sudo snap refresh {package_name}")

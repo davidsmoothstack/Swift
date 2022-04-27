@@ -1,0 +1,14 @@
+packages:
+  - name: openssh-client
+    manager:
+      name: apt
+    installatonTest:
+      command: ssh
+      expectedStatus: 255
+
+  - name: certbot
+    manager:
+      name: snap
+      options: --classic
+    installatonTest:
+      command: sudo certbot renew --dry-run
