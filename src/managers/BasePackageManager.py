@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from gc import is_finalized
+import logging
 
 
 class BasePackageManager(ABC):
@@ -29,9 +30,17 @@ class BasePackageManager(ABC):
 
     def execute(self, package_name):
         if self.is_installed(package_name) == False:
+            logging.info(
+                f"Package: '{package_name}' is not installed. Installing now...")
             self.install_package(package_name)
+
+            logging.info("Running post install actions...")
             self.post_install(package_name)
             return
 
+        logging.info(
+            f"Package '{package_name}' has been detected. Upgrading package...")
         self.upgrade_package(package_name)
+
+        logging.info("Running post install actions...")
         self.post_install(package_name)
