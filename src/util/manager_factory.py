@@ -5,15 +5,12 @@ from managers.BasePackageManager import BasePackageManager
 from managers.SnapPackageManager import SnapPackageManager
 
 
-class PackageManagerType(Enum):
-    APT = 1
-    SNAP = 2
+def get_package_manager(package_config) -> BasePackageManager:
+    type = package_config.manager.name
 
-
-def get_package_manager(type: PackageManagerType) -> BasePackageManager:
-    if type == PackageManagerType.APT:
-        return AptPackageManager()
-    if type == PackageManagerType.SNAP:
-        return SnapPackageManager()
+    if type == "apt":
+        return AptPackageManager(package_config)
+    if type == "snap":
+        return SnapPackageManager(package_config)
     else:
         return None

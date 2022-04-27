@@ -6,9 +6,9 @@ packages:
       command: ssh
       expectedStatus: 255
 
-  - name: certbot
-    manager:
-      name: snap
-      options: --classic
-    installatonTest:
-      command: sudo certbot renew --dry-run
+  # - name: certbot
+  #   manager:
+  #     name: snap
+  #     shellFlags: --classic
+  #   installatonTest:
+  #     command: sudo certbot renew --dry-run

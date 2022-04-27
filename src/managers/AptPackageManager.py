@@ -14,7 +14,8 @@ class AptPackageManager(BasePackageManager):
 
     def is_installed(self, package_name: str):
         """Check if the package already exists on the system"""
-        return shell(f"sudo apt-cache show {package_name}")
+        result = shell(f"sudo apt -qq list {package_name} | grep installed")
+        return result.isSuccess
 
     def upgrade_package(self, package_name: str):
         """Upgrades the package"""

@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
+from gc import is_finalized
 
 
 class BasePackageManager(ABC):
-    def __init__(self, options=None):
+    def __init__(self, yaml_config=None):
         super().__init__()
-        self.options = options
+        self.yaml_config = yaml_config
 
     @abstractmethod
     def install_package(self, package_name: str):
@@ -25,3 +26,12 @@ class BasePackageManager(ABC):
     def upgrade_package(self, package_name: str):
         """Upgrades the package"""
         pass
+
+    def execute(self, package_name):
+        if self.is_installed(package_name) == False:
+            self.install_package(package_name)
+            self.post_install(package_name)
+            return
+
+        self.upgrade_package(package_name)
+        self.post_install(package_name)
