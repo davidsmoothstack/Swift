@@ -19,6 +19,5 @@ if __name__ == "__main__":
                 logging.error(f"Error installing {package_config.name}")
                 logging.exception("")
                 continue
-
     except:
         logging.exception("")
