@@ -2,13 +2,19 @@ packages:
   - name: openssh-client
     manager:
       name: apt
-    installatonTest:
+    postInstallTest:
       command: ssh
       expectedStatus: 255
+
+  - name: snapd
+    manager:
+      name: apt
+    postInstallTest:
+      command: snap --version
 
   - name: certbot
     manager:
       name: snap
       installFlags: --classic
-    installatonTest:
+    postInstallTest:
       command: sudo certbot renew --dry-run

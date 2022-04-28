@@ -27,7 +27,7 @@ class BasePackageManager(ABC):
         """Upgrades the package"""
         pass
 
-    def execute(self, package_name):
+    def auto_update(self, package_name):
         if self.is_installed(package_name) == False:
             logging.info(
                 f"Package: '{package_name}' is not installed. Installing now...")
