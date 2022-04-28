@@ -7,13 +7,13 @@ from managers.YumPackageManager import YumPackageManager
 
 
 def get_package_manager(package_config) -> BasePackageManager:
-    type = package_config.manager.name
+    package_manager = package_config.manager.name
 
-    if type == "apt":
+    if package_manager == "apt":
         return AptPackageManager(package_config)
-    if type == "snap":
+    if package_manager == "snap":
         return SnapPackageManager(package_config)
-    if type == "yum":
+    if package_manager == "yum":
         return YumPackageManager(package_config)
     else:
         return None
