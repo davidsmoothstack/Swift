@@ -16,7 +16,7 @@ class BasePackageManager(ABC):
 
     @abstractmethod
     def is_installed(self, package_name: str):
-        """Check if the package already exists on the system"""
+        """Checks if the package already exists on the system"""
         pass
 
     @abstractmethod
@@ -24,25 +24,27 @@ class BasePackageManager(ABC):
         """Upgrades the package"""
         pass
 
-    def post_install(self, package_name: str):
+    def post_check(self, package_name: str):
         """Runs a check after package is installed"""
         postInstall = self.yaml_config.postInstallTest
-
         result = shell(postInstall.command)
 
         if result.isSuccess == False:
             raise Exception(f"Error installing {package_name}")
 
-        return result.isSuccess
+        logging.info(f"{package_name} passed all regression tests")
 
     def auto_update(self, package_name):
+        """Checks if a package is installed. If it's installed it upgrades it. If it's not, it installs the latest version
+        Runs a post check on the installed package to make sure it's functional
+        """
         if self.is_installed(package_name) == False:
             logging.info(
                 f"Package: '{package_name}' is not installed. Installing now...")
             self.install_package(package_name)
 
             logging.info("Running post install actions...")
-            self.post_install(package_name)
+            self.post_check(package_name)
             return
 
         logging.info(
@@ -50,4 +52,4 @@ class BasePackageManager(ABC):
         self.upgrade_package(package_name)
 
         logging.info("Running post install actions...")
-        self.post_install(package_name)
+        self.post_check(package_name)
