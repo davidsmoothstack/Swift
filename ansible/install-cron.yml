@@ -5,7 +5,7 @@
   vars:
     ansible_ssh_private_key_file: files/dw-us-east-1.pem
   tasks:
-    - name: Copy src to instance
+    - name: Copy auto updater to instance
       ansible.posix.synchronize:
         src: ../src/
         dest: /home/ubuntu/auto-package-update
