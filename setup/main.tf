@@ -46,7 +46,11 @@ resource "aws_instance" "instance" {
   instance_type          = "t2.nano"
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
   key_name               = "dw-us-east-1"
-
+  user_data              = <<EOF
+#!/bin/bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3-pip -y
+EOF
 
   tags = { Name = "DW-Swift" }
 }

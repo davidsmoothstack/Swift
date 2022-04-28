@@ -1,0 +1,20 @@
+- name: Install cron-job
+  hosts: ec2
+  become_user: root
+  remote_user: ubuntu
+  vars:
+    ansible_ssh_private_key_file: files/dw-us-east-1.pem
+  tasks:
+    - name: Copy src to instance
+      ansible.posix.synchronize:
+        src: ../src/
+        dest: /home/ubuntu/auto-package-update
+
+    - name: Install packages
+      shell: pip install -r /home/ubuntu/auto-package-update/requirements.txt
+
+    - name: Register cron job
+      ansible.builtin.cron:
+        name: "Python Auto Update Job"
+        special_time: hourly
+        job: "bash /home/ubuntu/auto-package-update/main.py"
