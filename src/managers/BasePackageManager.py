@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import logging
 
+from util.shell import shell
+
 
 class BasePackageManager(ABC):
     def __init__(self, yaml_config=None):
@@ -13,11 +15,6 @@ class BasePackageManager(ABC):
         pass
 
     @abstractmethod
-    def post_install(self, package_name: str):
-        """Runs a check after package is installed"""
-        pass
-
-    @abstractmethod
     def is_installed(self, package_name: str):
         """Check if the package already exists on the system"""
         pass
@@ -26,6 +23,17 @@ class BasePackageManager(ABC):
     def upgrade_package(self, package_name: str):
         """Upgrades the package"""
         pass
+
+    def post_install(self, package_name: str):
+        """Runs a check after package is installed"""
+        postInstall = self.yaml_config.postInstallTest
+
+        result = shell(postInstall.command)
+
+        if result.isSuccess == False:
+            raise Exception(f"Error installing {package_name}")
+
+        return result.isSuccess
 
     def auto_update(self, package_name):
         if self.is_installed(package_name) == False:

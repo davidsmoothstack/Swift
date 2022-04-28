@@ -3,8 +3,7 @@ packages:
     manager:
       name: apt
     postInstallTest:
-      command: ssh
-      expectedStatus: 255
+      command: ""
 
   - name: snapd
     manager:

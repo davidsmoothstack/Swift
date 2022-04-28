@@ -8,10 +8,6 @@ class AptPackageManager(BasePackageManager):
         """Installs a package"""
         return shell(f"sudo apt install -y {package_name}")
 
-    def post_install(self, package_name: str):
-        """Runs a check after package is installed"""
-        pass
-
     def is_installed(self, package_name: str):
         """Check if the package already exists on the system"""
         result = shell(f"sudo apt -qq list {package_name} | grep installed")
