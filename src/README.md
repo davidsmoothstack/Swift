@@ -24,5 +24,6 @@ packages:
 ```
 
 - Execute main.py with
-  - `$ ./main.py`
-  - `python3 main.py`
+  `./main.py`
+  or
+  `python3 main.py`
