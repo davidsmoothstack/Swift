@@ -1,6 +1,6 @@
 - name: Install cron-job
   hosts: ec2
-  become_user: root
+  become_user: ubuntu
   remote_user: ubuntu
   vars:
     ansible_ssh_private_key_file: files/dw-us-east-1.pem
@@ -17,5 +17,5 @@
     - name: Register cron job
       ansible.builtin.cron:
         name: "Python Auto Update Job"
-        special_time: hourly
+        # special_time: hourly
         job: $(cd {{project_path}}; ./main.py)
