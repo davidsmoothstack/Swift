@@ -3,6 +3,9 @@ from util.shell import shell
 
 
 class YumPackageManager(BasePackageManager):
+    def update_repositores(self):
+        return shell("sudo yum update")
+
     def install_package(self, package_name: str):
         """Installs a package"""
         return shell(f"sudo yum install -y {package_name}")

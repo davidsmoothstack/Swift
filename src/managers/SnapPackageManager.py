@@ -3,6 +3,9 @@ from util.shell import shell
 
 
 class SnapPackageManager(BasePackageManager):
+    def update_repositores(self):
+        return shell("sudo snap install core; sudo snap refresh core")
+
     def install_package(self, package_name: str):
         """Installs a package"""
         options = self.yaml_config.manager.installFlags

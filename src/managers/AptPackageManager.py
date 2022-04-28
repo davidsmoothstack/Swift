@@ -4,6 +4,9 @@ from util.shell import shell
 
 
 class AptPackageManager(BasePackageManager):
+    def update_repositores(self):
+        return shell("sudo apt update")
+
     def install_package(self, package_name: str):
         """Installs a package"""
         return shell(f"sudo apt install -y {package_name}")

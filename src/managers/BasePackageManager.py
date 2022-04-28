@@ -24,6 +24,11 @@ class BasePackageManager(ABC):
         """Upgrades the package"""
         pass
 
+    @abstractmethod
+    def update_repositores(self):
+        """Update repositories before installing packages"""
+        pass
+
     def post_check(self, package_name: str):
         """Runs a check after package is installed"""
         postInstall = self.yaml_config.postInstallTest
@@ -38,18 +43,26 @@ class BasePackageManager(ABC):
         """Checks if a package is installed. If it's installed it upgrades it. If it's not, it installs the latest version
         Runs a post check on the installed package to make sure it's functional
         """
-        if self.is_installed(package_name) == False:
-            logging.info(
-                f"Package: '{package_name}' is not installed. Installing now...")
-            self.install_package(package_name)
+        self.update_repositores()
 
-            logging.info("Running post install actions...")
-            self.post_check(package_name)
+        if self.is_installed(package_name):
+            self.upgrade_pipeline(package_name)
             return
 
+        self.install_pipeline(package_name)
+
+    def upgrade_pipeline(self, package_name):
         logging.info(
             f"Package '{package_name}' has been detected. Upgrading package...")
         self.upgrade_package(package_name)
+
+        logging.info("Running post install actions...")
+        self.post_check(package_name)
+
+    def install_pipeline(self, package_name):
+        logging.info(
+            f"Package: '{package_name}' is not installed. Installing now...")
+        self.install_package(package_name)
 
         logging.info("Running post install actions...")
         self.post_check(package_name)
