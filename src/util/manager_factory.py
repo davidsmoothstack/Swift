@@ -4,6 +4,7 @@ from managers.AptPackageManager import AptPackageManager
 from managers.BasePackageManager import BasePackageManager
 from managers.SnapPackageManager import SnapPackageManager
 from managers.YumPackageManager import YumPackageManager
+from managers.ScriptManager import ScriptPackageManager
 
 
 def get_package_manager(package_config) -> BasePackageManager:
@@ -15,5 +16,7 @@ def get_package_manager(package_config) -> BasePackageManager:
         return SnapPackageManager(package_config)
     if package_manager == "yum":
         return YumPackageManager(package_config)
+    if package_manager == "script":
+        return ScriptPackageManager(package_config)
     else:
         return None

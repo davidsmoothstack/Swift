@@ -1,19 +1,9 @@
 packages:
-  - name: openssh-client
+  - name: docker
     manager:
-      name: apt
+      name: script
+      scriptName: install-docker.sh
+      params:
+        version: 5:20.10.15~3-0~ubuntu-jammy
     postInstallTest:
-      command: ""
-
-  - name: snapd
-    manager:
-      name: apt
-    postInstallTest:
-      command: snap --version
-
-  - name: certbot
-    manager:
-      name: snap
-      installFlags: --classic
-    postInstallTest:
-      command: sudo certbot renew --dry-run
+      command: docker version
